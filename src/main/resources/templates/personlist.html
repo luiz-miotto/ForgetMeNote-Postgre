@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>People List</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+
+
+    <h1>People List</h1>
+    <a th:href="@{addperson}" id="addperson">Add Person</a>
+    <div th:each="person : ${people}">
+
+        <span id="npc_name" th:text="${person.name}">NPC</span>
+        <br>
+        <div id="description">Description</div>
+        <div></div>
+        <span th:text="${person.description}">Description</span>
+        <div id="motivation">Motivation</div>
+        <div th:each="motivation : ${person.getMotivations()}">
+            <p th:text="${motivation}">Motivation</p>
+        </div>
+        <div id="suspectedSecret">Suspected Secret</div>
+        <div th:each="suspectedSecret : ${person.getSuspectedSecrets()}">
+            <p th:text="${suspectedSecret}">Suspected Secrets</p>
+        </div>
+
+        <div id="disposition">Disposition</div>
+        <div th:each="disposition : ${person.getDispositions()}">
+            <p th:text="${disposition}">Disposition</p>
+        </div>
+        <br>
+    </div>
+
+
+</body>
+</html>
