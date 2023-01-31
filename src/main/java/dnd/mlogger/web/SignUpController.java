@@ -59,8 +59,10 @@ public class SignUpController {
 
     @PostMapping
     public String processRegistration(RegistrationForm form) {
-        post.createPost(form);
+        post.signUp(form);
+        System.out.println("Testing that this worked");
         return "redirect:/personlist";
+
     }
     /*
     @PostMapping("/signup")

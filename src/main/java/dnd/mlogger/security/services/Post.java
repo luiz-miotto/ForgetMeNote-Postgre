@@ -18,7 +18,7 @@ public class Post implements Serializable {
         this.restTemplate = new RestTemplate();
     }
 
-    public Post createPost(RegistrationForm registrationForm){
+    public Post signUp(RegistrationForm registrationForm){
         String url = "http://localhost:8080/api/auth/signup";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -42,5 +42,24 @@ public class Post implements Serializable {
             return null;
         }
 
+    }
+
+    public Post login(String username, String password){
+        String url = "http://localhost:8080/api/auth/login";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+       // headers.set("x-request-source", "desktop");
+        Map<String,Object> map = new HashMap<>();
+        map.put("username", username);
+        map.put("pasword", password);
+        HttpEntity<Map<String,Object>> entity = new HttpEntity<>(map,headers);
+        ResponseEntity<Post> response = this.restTemplate.postForEntity(url, entity, Post.class);
+
+        if (response.getStatusCode() == HttpStatus.ACCEPTED) {
+            return response.getBody();
+        } else {
+            return null;
+        }
     }
 }

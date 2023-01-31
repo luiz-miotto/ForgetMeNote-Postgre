@@ -31,7 +31,7 @@ public class TestController {
     }
 
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     public String adminAccess() {
         return "Admin Board.";
     }

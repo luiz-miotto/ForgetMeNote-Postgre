@@ -8,5 +8,23 @@
 </head>
 <body>
 
+<script>var form = $('#form-id').get(0);
+var formData = new FormData(form);
+
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "url");
+xhr.setRequestHeader("Authorization", "jwt token");
+xhr.send(formData);</script>
+
+<form method="POST"  action="#" th:action="@{/api/auth/login}" th:object="${loginRequest}" >
+    <label for="username">Username: </label>
+    <input type="text" name="username" th:field="*{username}"  id="username"/><br>
+
+    <label for="password">Password: </label>
+    <input type="text" name="password" th:field="*{password}"  id="password"/><br>
+
+    <input type="submit" value="login">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+</form>
 </body>
 </html>
